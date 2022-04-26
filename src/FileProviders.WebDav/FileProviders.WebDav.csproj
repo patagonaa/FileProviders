@@ -4,11 +4,13 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <PackageId>patagona.$(AssemblyName)</PackageId>
         <Authors>patagona</Authors>
-        <Description>A IFileProvider implementation using WebDAV</Description>
+        <Description>A IFileProvider implementation using WebDAV.
+
+Right now, this implementation is likely incomplete and might even be insecure (especially in regards to path traversal attacks), so use it at your own risk and audit the few lines of code before using it yourself.</Description>
         <PackageProjectUrl>https://github.com/patagonaa/FileProviders.WebDav</PackageProjectUrl>
         <PackageTags>IFileProvider;WebDAV;Microsoft.Extensions.FileProviders;FileProviders</PackageTags>
         <RepositoryUrl>https://github.com/patagonaa/FileProviders.WebDav.git</RepositoryUrl>
-        <Version>1.0.0</Version>
+        <Version>1.0.1</Version>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 
