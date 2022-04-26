@@ -48,7 +48,7 @@ namespace FileProviders.WebDav
                 throw new WebException("WebDav error " + result.StatusCode + " while listing directory");
             }
 
-            var thisResource = result.Resources.Single(x => x.Uri.TrimEnd('/') == uri.AbsolutePath.TrimEnd('/'));
+            var thisResource = result.Resources.Single(x => Uri.UnescapeDataString(uri.LocalPath.TrimEnd('/')) == Uri.UnescapeDataString(x.Uri.TrimEnd('/')));
             if (!thisResource.IsCollection)
             {
                 return NotFoundDirectoryContents.Singleton;
@@ -103,7 +103,7 @@ namespace FileProviders.WebDav
 
         private Uri CheckAndGetAbsoluteUri(string relativeUriString)
         {
-            var relativeUri = new Uri(relativeUriString.TrimStart('/'), UriKind.Relative);
+            var relativeUri = new Uri(relativeUriString.TrimStart('/', '\\'), UriKind.Relative);
             var absoluteUri = new Uri(_baseUri, relativeUri);
 
             if (!_baseUri.IsBaseOf(absoluteUri))

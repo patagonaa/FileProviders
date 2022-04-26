@@ -23,7 +23,7 @@ namespace FileProviders.WebDav
 
         public string PhysicalPath => null;
 
-        public string Name => Path.GetFileName(_resource.Uri.TrimEnd('/'));
+        public string Name => Uri.UnescapeDataString(Path.GetFileName(_resource.Uri.TrimEnd('/')));
 
         public DateTimeOffset LastModified => _resource.LastModifiedDate ?? DateTimeOffset.MinValue;
 

@@ -10,7 +10,7 @@ Right now, this implementation is likely incomplete and might even be insecure (
         <PackageProjectUrl>https://github.com/patagonaa/FileProviders.WebDav</PackageProjectUrl>
         <PackageTags>IFileProvider;WebDAV;Microsoft.Extensions.FileProviders;FileProviders</PackageTags>
         <RepositoryUrl>https://github.com/patagonaa/FileProviders.WebDav.git</RepositoryUrl>
-        <Version>1.0.1</Version>
+        <Version>1.0.2</Version>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 
