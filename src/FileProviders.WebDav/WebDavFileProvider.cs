@@ -103,12 +103,12 @@ namespace FileProviders.WebDav
 
         private Uri CheckAndGetAbsoluteUri(string relativeUriString)
         {
-            var relativeUri = new Uri(relativeUriString.TrimStart('/', '\\'), UriKind.Relative);
-            var absoluteUri = new Uri(_baseUri, relativeUri);
+            var escapedUri = string.Join("/", relativeUriString.Split(new[] { '/', '\\' }, StringSplitOptions.RemoveEmptyEntries).Select(x => Uri.EscapeDataString(x)));
+            var absoluteUri = new Uri(_baseUri, escapedUri);
 
             if (!_baseUri.IsBaseOf(absoluteUri))
             {
-                throw new ArgumentException($"URI '{relativeUri}' is outside base path. This might indicate a possible path traversal attack attempt!");
+                throw new ArgumentException($"URI '{relativeUriString}' is outside base path. This might indicate a possible path traversal attack attempt!");
             }
 
             return absoluteUri;
