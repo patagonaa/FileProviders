@@ -11,8 +11,8 @@ namespace FileProviders.WebDav
 {
     public class WebDavFileProvider : IFileProvider, IDisposable
     {
-        private readonly WebDavClient _client;
-        private readonly Uri _baseUri;
+        protected readonly WebDavClient _client;
+        protected readonly Uri _baseUri;
 
         public WebDavFileProvider(IOptions<WebDavConfiguration> options)
         {
@@ -83,25 +83,7 @@ namespace FileProviders.WebDav
             return new WebDavFileInfo(_client, result.Resources.Single());
         }
 
-        public bool DeleteFile(string subpath)
-        {
-            var uri = CheckAndGetAbsoluteUri(subpath);
-
-            var result = _client.Delete(uri).Result;
-            if (result.StatusCode == 404)
-            {
-                return false;
-            }
-
-            if (!result.IsSuccessful)
-            {
-                throw new WebException("WebDav error " + result.StatusCode + " while deleting file");
-            }
-
-            return true;
-        }
-
-        private Uri CheckAndGetAbsoluteUri(string relativeUriString)
+        protected Uri CheckAndGetAbsoluteUri(string relativeUriString)
         {
             var escapedUri = string.Join("/", relativeUriString.Split(new[] { '/', '\\' }, StringSplitOptions.RemoveEmptyEntries).Select(x => Uri.EscapeDataString(x)));
             var absoluteUri = new Uri(_baseUri, escapedUri);
