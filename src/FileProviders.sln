@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileProviders.WebDav", "FileProviders.WebDav\FileProviders.WebDav.csproj", "{A1CEC982-E2CD-4DE4-A0D8-96F2D75F9061}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileProviders.Async", "FileProviders.Async\FileProviders.Async.csproj", "{420F4314-6481-4828-BBD6-49701347F3FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{A1CEC982-E2CD-4DE4-A0D8-96F2D75F9061}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1CEC982-E2CD-4DE4-A0D8-96F2D75F9061}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1CEC982-E2CD-4DE4-A0D8-96F2D75F9061}.Release|Any CPU.Build.0 = Release|Any CPU
+		{420F4314-6481-4828-BBD6-49701347F3FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{420F4314-6481-4828-BBD6-49701347F3FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{420F4314-6481-4828-BBD6-49701347F3FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{420F4314-6481-4828-BBD6-49701347F3FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

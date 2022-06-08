@@ -1,12 +1,15 @@
-﻿using Microsoft.Extensions.FileProviders;
+﻿using FileProviders.Async;
+using Microsoft.Extensions.FileProviders;
 using System;
 using System.IO;
 using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
 using WebDav;
 
 namespace FileProviders.WebDav
 {
-    class WebDavFileInfo : IFileInfo
+    class WebDavFileInfo : IFileInfo, IAsyncFileInfo
     {
         private readonly WebDavClient _client;
         private readonly WebDavResource _resource;
@@ -31,9 +34,17 @@ namespace FileProviders.WebDav
 
         public Stream CreateReadStream()
         {
-            var task = _client.GetProcessedFile(_resource.Uri);
-            task.RunSynchronously();
-            var result = task.Result;
+            var result = Task.Run(() => _client.GetProcessedFile(_resource.Uri)).Result;
+            if (!result.IsSuccessful)
+            {
+                throw new WebException("WebDav error " + result.StatusCode + " while getting file");
+            }
+            return result.Stream;
+        }
+
+        public async Task<Stream> CreateReadStreamAsync(CancellationToken cancellationToken = default)
+        {
+            var result = await _client.GetProcessedFile(_resource.Uri, new GetFileParameters { CancellationToken = cancellationToken });
             if (!result.IsSuccessful)
             {
                 throw new WebException("WebDav error " + result.StatusCode + " while getting file");

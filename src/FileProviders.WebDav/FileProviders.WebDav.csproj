@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>netstandard2.1</TargetFramework>
         <PackageId>patagona.$(AssemblyName)</PackageId>
         <Authors>patagona</Authors>
         <Description>A IFileProvider implementation using WebDAV.
 
 Right now, this implementation is likely incomplete and might even be insecure (especially in regards to path traversal attacks), so use it at your own risk and audit the few lines of code before using it yourself.</Description>
-        <PackageProjectUrl>https://github.com/patagonaa/FileProviders.WebDav</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/patagonaa/FileProviders</PackageProjectUrl>
         <PackageTags>IFileProvider;WebDAV;Microsoft.Extensions.FileProviders;FileProviders</PackageTags>
-        <RepositoryUrl>https://github.com/patagonaa/FileProviders.WebDav.git</RepositoryUrl>
-        <Version>1.0.5</Version>
+        <RepositoryUrl>https://github.com/patagonaa/FileProviders.git</RepositoryUrl>
+        <Version>1.0.7</Version>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 
@@ -18,6 +18,10 @@ Right now, this implementation is likely incomplete and might even be insecure (
         <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="6.0.0" />
         <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
         <PackageReference Include="WebDav.Client" Version="2.8.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\FileProviders.Async\FileProviders.Async.csproj" />
     </ItemGroup>
 
 </Project>

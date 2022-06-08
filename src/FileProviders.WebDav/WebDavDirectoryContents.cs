@@ -1,12 +1,15 @@
-﻿using Microsoft.Extensions.FileProviders;
+﻿using FileProviders.Async;
+using Microsoft.Extensions.FileProviders;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using WebDav;
 
 namespace FileProviders.WebDav
 {
-    class WebDavDirectoryContents : IDirectoryContents
+    class WebDavDirectoryContents : IDirectoryContents, IAsyncDirectoryContents
     {
         private readonly WebDavClient _client;
         private readonly IReadOnlyCollection<WebDavResource> _resources;
@@ -21,12 +24,23 @@ namespace FileProviders.WebDav
 
         public IEnumerator<IFileInfo> GetEnumerator()
         {
-            return _resources.Select(x => new WebDavFileInfo(_client, x)).GetEnumerator();
+            foreach (var resource in _resources)
+            {
+                yield return new WebDavFileInfo(_client, resource);
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        public async IAsyncEnumerator<IAsyncFileInfo> GetAsyncEnumerator(CancellationToken cancellationToken = default)
+        {
+            foreach (var resource in _resources)
+            {
+                yield return await Task.FromResult(new WebDavFileInfo(_client, resource));
+            }
         }
     }
 }
