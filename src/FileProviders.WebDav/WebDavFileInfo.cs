@@ -31,9 +31,7 @@ namespace FileProviders.WebDav
 
         public Stream CreateReadStream()
         {
-            var task = _client.GetProcessedFile(_resource.Uri);
-            task.RunSynchronously();
-            var result = task.Result;
+            var result = _client.GetProcessedFile(_resource.Uri).Result;
             if (!result.IsSuccessful)
             {
                 throw new WebException("WebDav error " + result.StatusCode + " while getting file");
