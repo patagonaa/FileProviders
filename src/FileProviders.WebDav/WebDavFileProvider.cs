@@ -37,7 +37,9 @@ namespace FileProviders.WebDav
                     new KeyValuePair<string, string>("depth", "1")
                 }
             };
-            var result = _client.Propfind(uri, parameters).Result;
+            var task = _client.Propfind(uri, parameters);
+            task.RunSynchronously();
+            var result = task.Result;
             if (result.StatusCode == 404)
             {
                 return NotFoundDirectoryContents.Singleton;
@@ -69,7 +71,9 @@ namespace FileProviders.WebDav
                 }
             };
 
-            var result = _client.Propfind(uri, parameters).Result;
+            var task = _client.Propfind(uri, parameters);
+            task.RunSynchronously();
+            var result = task.Result;
             if (result.StatusCode == 404)
             {
                 return new NotFoundFileInfo(subpath);
